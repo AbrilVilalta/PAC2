@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,21 +11,29 @@ namespace DLL_AbrilVilalta_MosiesCuartero
 {
     public partial class PhoneTextBox : UserControl
     {
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: Phone
+        // ══════════════════════════════════════════════════════════════
         public static readonly DependencyProperty PhoneProperty =
             DependencyProperty.Register(
             "Phone",
             typeof(string),
             typeof(PhoneTextBox),
             new FrameworkPropertyMetadata(string.Empty,
-            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-            OnPhoneChanged));
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: Mask
+        // ══════════════════════════════════════════════════════════════
         public static readonly DependencyProperty MaskProperty =
             DependencyProperty.Register("Mask",
             typeof(string),
             typeof(PhoneTextBox),
             new PropertyMetadata(string.Empty));
 
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: TooltipMessage
+        // ══════════════════════════════════════════════════════════════
         public static readonly DependencyProperty TooltipMessageProperty =
             DependencyProperty.Register(
             "TooltipMessage",
@@ -30,6 +41,9 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             typeof(PhoneTextBox),
             new PropertyMetadata("ex. 123456789"));
 
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: BorderColor
+        // ══════════════════════════════════════════════════════════════
         public static readonly DependencyProperty BorderColorProperty =
             DependencyProperty.Register(
             "BorderColor",
@@ -37,12 +51,31 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             typeof(PhoneTextBox),
             new PropertyMetadata(Brushes.Gray));
 
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: IsValid
+        // Public boolean that exposes whether the current value is valid.
+        // ══════════════════════════════════════════════════════════════
+        public static readonly DependencyProperty IsValidProperty =
+            DependencyProperty.Register(
+                "IsValid",
+                typeof(bool),
+                typeof(PhoneTextBox),
+                new PropertyMetadata(true));
+
+        // ══════════════════════════════════════════════════════════════
+        // DependencyProperty: ErrorIndicatorVisibility
+        // Controls whether the red error circle is shown or hidden.
+        // ══════════════════════════════════════════════════════════════
         public static readonly DependencyProperty ErrorIndicatorVisibilityProperty =
             DependencyProperty.Register(
-            "ErrorIndicatorVisibility",
-            typeof(Visibility),
-            typeof(PhoneTextBox),
-            new PropertyMetadata(Visibility.Collapsed));
+                "ErrorIndicatorVisibility",
+                typeof(Visibility),
+                typeof(PhoneTextBox),
+                new PropertyMetadata(Visibility.Collapsed));
+
+        // ══════════════════════════════════════
+        // CLR Property Wrappers
+        // ══════════════════════════════════════
 
         public string Phone
         {
@@ -68,111 +101,74 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             set => SetValue(BorderColorProperty, value);
         }
 
+        public bool IsValid
+        {
+            get => (bool)GetValue(IsValidProperty);
+            set => SetValue(IsValidProperty, value);
+        }
+
         public Visibility ErrorIndicatorVisibility
         {
             get => (Visibility)GetValue(ErrorIndicatorVisibilityProperty);
             set => SetValue(ErrorIndicatorVisibilityProperty, value);
         }
 
-        private bool _hasBeenTouched = false;
-
-        private bool _isFormatting;
+        // ══════════════════════════════════════
+        // Constructor
+        // ══════════════════════════════════════
 
         public PhoneTextBox()
         {
             InitializeComponent();
-
-            this.IsVisibleChanged += (s, e) =>
-            {
-                if ((bool)e.NewValue == true)
-                {
-                    _hasBeenTouched = false;
-                    ErrorIndicatorVisibility = Visibility.Collapsed;
-                    TooltipMessage = "ex. 123456789";
-                    try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
-                    catch { BorderColor = Brushes.Gray; }
-                }
-            };
-
+            PhoneTextBoxControl.LostFocus += (s, e) => ValidatePhone();
             PhoneTextBoxControl.TextChanged += PhoneTextBoxControl_TextChanged;
-
-            PhoneTextBoxControl.LostFocus += (s, e) =>
-            {
-                if (_hasBeenTouched)
-                    ValidatePhone();
-            };
         }
 
+        // ══════════════════════════════════════════════════════════════
+        // ValidatePhone: checks the phone against the Mask requirement.
+        // Updates BorderColor, TooltipMessage, IsValid and the
+        // visibility of the error indicator circle.
+        // ══════════════════════════════════════════════════════════════
         private void ValidatePhone()
         {
             if (string.IsNullOrEmpty(Phone))
             {
                 TooltipMessage = "Phone cannot be empty.\nex. 123456789";
                 BorderColor = (Brush)FindResource("InputBorderBrush");
-                ErrorIndicatorVisibility = Visibility.Collapsed;
+                IsValid = false;
+                ErrorIndicatorVisibility = Visibility.Visible;
             }
             else if (!IsValidPhone(Phone))
             {
-                TooltipMessage = "Invalid phone number.\nIt must have 9 digits.\nex. 123456789";
+                TooltipMessage = "Invalid phone.\nex. 123456789";
                 BorderColor = Brushes.LightCoral;
+                IsValid = false;
                 ErrorIndicatorVisibility = Visibility.Visible;
             }
             else
             {
                 TooltipMessage = "ex. 123456789";
+                BorderColor = (Brush)FindResource("InputBorderBrush");
+                IsValid = true;
                 ErrorIndicatorVisibility = Visibility.Collapsed;
-                try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
-                catch { BorderColor = Brushes.Gray; }
             }
-        }
-
-        private static void OnPhoneChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (PhoneTextBox)d;
-            control.ValidatePhone();
         }
 
         private void PhoneTextBoxControl_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (_isFormatting) return; // evita recursió
-
-            _hasBeenTouched = true;
             var textBox = sender as TextBox;
             if (textBox == null) return;
 
             string digits = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
             string formatted = "";
             if (digits.Length >= 1) formatted = digits.Substring(0, Math.Min(3, digits.Length));
             if (digits.Length > 3) formatted += "-" + digits.Substring(3, Math.Min(3, digits.Length - 3));
             if (digits.Length > 6) formatted += "-" + digits.Substring(6, Math.Min(3, digits.Length - 6));
 
-            _isFormatting = true;
-            try
+            if (textBox.Text != formatted)
             {
-                if (textBox.Text != formatted)
-                {
-                    int caretPos = textBox.CaretIndex;
-                    int digitsBeforeCaret = textBox.Text
-                        .Substring(0, caretPos)
-                        .Count(char.IsDigit);
-
-                    textBox.Text = formatted;
-
-                    int newCaret = 0;
-                    int digitCount = 0;
-                    while (newCaret < formatted.Length && digitCount < digitsBeforeCaret)
-                    {
-                        if (char.IsDigit(formatted[newCaret])) digitCount++;
-                        newCaret++;
-                    }
-                    textBox.CaretIndex = newCaret;
-                }
-
-                Phone = formatted; // ← sempre actualitza, sense retard
-            }
-            finally
-            {
-                _isFormatting = false;
+                Phone = formatted;
             }
         }
 
@@ -181,7 +177,9 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             var textBox = sender as TextBox;
             var currentText = textBox?.Text;
             var newText = currentText + e.Text;
-            e.Handled = !IsValidPhone(newText);
+            var isTextValid = IsValidPhone(newText);
+            ValidatePhone();
+            e.Handled = !isTextValid;
         }
 
         private bool IsValidPhone(string phone)
@@ -214,13 +212,15 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             return pattern;
         }
 
+        // ══════════════════════════════════════════════════════════════
+        // Reset: restores the control to its initial clean state.
+        // ══════════════════════════════════════════════════════════════
         public void Reset()
         {
-            _hasBeenTouched = false;
-            ErrorIndicatorVisibility = Visibility.Collapsed;
+            BorderColor = Brushes.Gray;
             TooltipMessage = "ex. 123456789";
-            try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
-            catch { BorderColor = Brushes.Gray; }
+            IsValid = true;
+            ErrorIndicatorVisibility = Visibility.Collapsed;
         }
     }
 }
