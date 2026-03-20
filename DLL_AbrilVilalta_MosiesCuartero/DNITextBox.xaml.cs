@@ -10,23 +10,21 @@ namespace DLL_AbrilVilalta_MosiesCuartero
 {
     public partial class DNITextBox : UserControl
     {
-        // Flag per saber si l'usuari ha tocat el camp
         private bool _hasBeenTouched = false;
 
         public DNITextBox()
         {
             InitializeComponent();
 
-            // Reseteja l'estat cada vegada que el formulari es torna visible
             this.IsVisibleChanged += (s, e) =>
             {
                 if ((bool)e.NewValue == true)
                 {
-                    _hasBeenTouched          = false;
+                    _hasBeenTouched = false;
                     ValidateDNI();
                     ErrorIndicatorVisibility = Visibility.Collapsed;
-                    TooltipMessage           = "ex. 12345678Z";
-                    try   { BorderColor = (Brush)FindResource("InputBorderBrush"); }
+                    TooltipMessage = "ex. 12345678Z";
+                    try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
                     catch { BorderColor = Brushes.Gray; }
                 }
             };
@@ -37,13 +35,6 @@ namespace DLL_AbrilVilalta_MosiesCuartero
                 ValidateDNI();
             };
 
-            // Marca el camp com a tocat quan l'usuari escriu
-            DNITextBoxControl.TextChanged += (s, e) =>
-            {
-                _hasBeenTouched = true;
-            };
-
-            // Només valida en perdre el focus si l'usuari ha interactuat
             DNITextBoxControl.LostFocus += (s, e) =>
             {
                 if (_hasBeenTouched)
@@ -51,53 +42,46 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             };
         }
 
-        // DependencyProperty per al Text (Propietat per a WPF)
-        public static readonly DependencyProperty DNIProperty =
-            DependencyProperty.Register("DNI",
-            typeof(string),
-            typeof(DNITextBox),
-            new FrameworkPropertyMetadata(string.Empty,
-            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        // ── DependencyProperties ────────────────────────────────────────────
 
-        // DependencyProperty per a la màscara (Propietat per a WPF)
+        public static readonly DependencyProperty DNIProperty =
+            DependencyProperty.Register("DNI", typeof(string), typeof(DNITextBox),
+                new FrameworkPropertyMetadata(string.Empty,
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public static readonly DependencyProperty MaskProperty =
-            DependencyProperty.Register("Mask",
-            typeof(string),
-            typeof(DNITextBox),
-            new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Mask", typeof(string), typeof(DNITextBox),
+                new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty TooltipMessageProperty =
-            DependencyProperty.Register(
-            "TooltipMessage",
-            typeof(string),
-            typeof(DNITextBox),
-            new PropertyMetadata("ex. 12345678Z"));
+            DependencyProperty.Register("TooltipMessage", typeof(string), typeof(DNITextBox),
+                new PropertyMetadata("ex. 12345678Z"));
 
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register(
-            "BorderColor",
-            typeof(Brush),
-            typeof(DNITextBox),
-            new PropertyMetadata(Brushes.Gray));
+            DependencyProperty.Register("BorderColor", typeof(Brush), typeof(DNITextBox),
+                new PropertyMetadata(Brushes.Gray));
 
-        // Controla la visibilitat del cercle d'error
         public static readonly DependencyProperty ErrorIndicatorVisibilityProperty =
-            DependencyProperty.Register(
-            "ErrorIndicatorVisibility",
-            typeof(Visibility),
-            typeof(DNITextBox),
-            new PropertyMetadata(Visibility.Collapsed));
+            DependencyProperty.Register("ErrorIndicatorVisibility", typeof(Visibility), typeof(DNITextBox),
+                new PropertyMetadata(Visibility.Collapsed));
+
+        // ── NOU: IsValid ────────────────────────────────────────────────────
+        public static readonly DependencyProperty IsValidProperty =
+            DependencyProperty.Register("IsValid", typeof(bool), typeof(DNITextBox),
+                new PropertyMetadata(false));
+
+        // ── Propietats CLR ──────────────────────────────────────────────────
 
         public string DNI
         {
-            get { return (string)GetValue(DNIProperty); }
-            set { SetValue(DNIProperty, value); }
+            get => (string)GetValue(DNIProperty);
+            set => SetValue(DNIProperty, value);
         }
 
         public string Mask
         {
-            get { return (string)GetValue(MaskProperty); }
-            set { SetValue(MaskProperty, value); }
+            get => (string)GetValue(MaskProperty);
+            set => SetValue(MaskProperty, value);
         }
 
         public string TooltipMessage
@@ -118,84 +102,88 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             set => SetValue(ErrorIndicatorVisibilityProperty, value);
         }
 
-        private void ValidateDNI()
+        // NOU
+        public bool IsValid
         {
-
-            if (string.IsNullOrEmpty(DNI))
-            {
-                TooltipMessage = "DNI cannot be empty. \nex. 12345678Z";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
-            }
-            else if (DNI.Length != Mask.Length)
-            {
-                TooltipMessage = "Invalid DNI. \nex. 12345678Z";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
-            }
-            else if (!IsDNIValid(DNI))
-            {
-                TooltipMessage = "Invalid DNI. \nex. 12345678Z";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
-            }
-            else
-            {
-                TooltipMessage = "ex. 12345678Z";
-                ErrorIndicatorVisibility = Visibility.Collapsed;
-                try
-                {
-                    BorderColor = (Brush)FindResource("InputBorderBrush");
-                }
-                catch
-                {
-                    BorderColor = Brushes.Gray;
-                }
-            }
-
-            try
-            {
-                if (!int.TryParse(DNI.Substring(0, 8), out int numDNI))
-                {
-                    TooltipMessage = "Invalid DNI. The first 8 characters must be digits. \nex. 12345678Z";
-                    BorderColor = Brushes.LightCoral;
-                    ErrorIndicatorVisibility = Visibility.Visible;
-                }
-                else
-                {
-                    List<string> t_LletraDni = new List<string>
-                            {
-                                "T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"
-                            };
-                    string lletraDni = DNI[8].ToString().ToUpper();
-                    int calcul = numDNI % 23;
-
-                    if (lletraDni != t_LletraDni[calcul])
-                    {
-                        TooltipMessage = "Invalid DNI. With the number {DNI.Substring(0, 8)} the correct letter is '{t_LletraDni[calcul]}', not '{lletraDni}'. \nex. 12345678Z";
-                        BorderColor = Brushes.LightCoral;
-                        ErrorIndicatorVisibility = Visibility.Visible;
-                    }
-                }
-            }
-            catch
-            {
-                TooltipMessage = "Invalid DNI format. It must be 8 digits followed by a letter. \nex. 12345678Z";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
-            }
-
+            get => (bool)GetValue(IsValidProperty);
+            set => SetValue(IsValidProperty, value);
         }
 
-        // Mètode que valida l'entrada d'acord amb la màscara (s'executa quan es prem una tecla)
+        // ── Validació ───────────────────────────────────────────────────────
+
+        private void SetError(string message)
+        {
+            TooltipMessage = message;
+            BorderColor = Brushes.LightCoral;
+            ErrorIndicatorVisibility = Visibility.Visible;
+            IsValid = false;
+        }
+
+        private void SetValid()
+        {
+            TooltipMessage = "ex. 12345678Z";
+            ErrorIndicatorVisibility = Visibility.Collapsed;
+            IsValid = true;
+            try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
+            catch { BorderColor = Brushes.Gray; }
+        }
+
+        private void ValidateDNI()
+        {
+            // 1. Buit
+            if (string.IsNullOrEmpty(DNI))
+            {
+                SetError("DNI cannot be empty.\nex. 12345678Z");
+                return;
+            }
+
+            // 2. Longitud (màscara)
+            if (DNI.Length != Mask.Length)
+            {
+                SetError("Invalid DNI.\nex. 12345678Z");
+                return;
+            }
+
+            // 3. Format (màscara regex)
+            if (!IsDNIValid(DNI))
+            {
+                SetError("Invalid DNI.\nex. 12345678Z");
+                return;
+            }
+
+            // 4. Els 8 primers han de ser dígits
+            if (!int.TryParse(DNI.Substring(0, 8), out int numDNI))
+            {
+                SetError("Invalid DNI. The first 8 characters must be digits.\nex. 12345678Z");
+                return;
+            }
+
+            // 5. Lletra de control
+            var lletresDNI = new List<string>
+            {
+                "T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"
+            };
+
+            string lletraIntroduida = DNI[8].ToString().ToUpper();
+            string lletraCorrecta = lletresDNI[numDNI % 23];
+
+            if (lletraIntroduida != lletraCorrecta)
+            {
+                SetError($"Invalid DNI. With {DNI.Substring(0, 8)} the correct letter is '{lletraCorrecta}', not '{lletraIntroduida}'.\nex. 12345678Z");
+                return;
+            }
+
+            // Tot correcte
+            SetValid();
+        }
+
+        // ── Esdeveniments del TextBox ────────────────────────────────────────
+
         private void MyMaskedTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            var textBox     = sender as TextBox;
-            var currentText = textBox?.Text;
-            var newText     = currentText + e.Text;
-            var isTextValid = IsDNIValid(newText);
-            e.Handled       = !isTextValid;
-            ValidateDNI();
+            var textBox = sender as TextBox;
+            var newText = textBox?.Text + e.Text;
+            e.Handled = !IsDNIValid(newText);
         }
 
         private void MyMaskedTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -203,40 +191,40 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             ValidateDNI();
         }
 
+        // ── Helpers ─────────────────────────────────────────────────────────
+
         private bool IsDNIValid(string dni)
         {
             if (string.IsNullOrEmpty(Mask)) return true;
             if (dni.Length > Mask.Length) return false;
             var subMask = Mask.Substring(0, dni.Length);
-            var regexPattern = ConvertMaskToRegex(subMask);
-            return Regex.IsMatch(dni, regexPattern);
+            return Regex.IsMatch(dni, ConvertMaskToRegex(subMask));
         }
 
-        // Funció per convertir la màscara a una expressió regular
         private string ConvertMaskToRegex(string mask)
         {
             string pattern = "^";
-            foreach (var character in mask)
+            foreach (var c in mask)
             {
-                switch (character)
+                switch (c)
                 {
-                    case '0': pattern += "[0-9]";       break;
-                    case 'A': pattern += "[A-Z]";       break;
-                    case 'a': pattern += "[a-z]";       break;
-                    case 'Z': pattern += "[a-zA-Z]";    break;
-                    case 'z': pattern += "[a-zA-Z]";    break;
+                    case '0': pattern += "[0-9]"; break;
+                    case 'A': pattern += "[A-Z]"; break;
+                    case 'a': pattern += "[a-z]"; break;
+                    case 'Z':
+                    case 'z': pattern += "[a-zA-Z]"; break;
                     case '9': pattern += "[0-9a-zA-Z]"; break;
-                    default:  pattern += Regex.Escape(character.ToString()); break;
+                    default: pattern += Regex.Escape(c.ToString()); break;
                 }
             }
-            pattern += "$";
-            return pattern;
+            return pattern + "$";
         }
+
         public void Reset()
         {
             BorderColor = Brushes.Gray;
             TooltipMessage = "ex. 12345678Z";
+            IsValid = false;
         }
-
     }
 }

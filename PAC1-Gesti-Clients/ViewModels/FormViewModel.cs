@@ -103,6 +103,20 @@ namespace WPF_MVVM_SPA_Template.ViewModels
             }
         }
 
+        private bool _isDNIValid = false;
+        public bool IsDNIValid
+        {
+            get => _isDNIValid;
+            set { _isDNIValid = value; OnPropertyChanged(); }
+        }
+
+        private bool _isEmailValid = false;
+        public bool IsEmailValid
+        {
+            get => _isEmailValid;
+            set { _isEmailValid = value; OnPropertyChanged(); }
+        }
+
         /* ════════════════════════════════════════════════════════════════════════
          * Currently selected client — also notifies CreatedAtDisplay when changed
          * ════════════════════════════════════════════════════════════════════════ */
@@ -148,65 +162,29 @@ namespace WPF_MVVM_SPA_Template.ViewModels
         {
             bool isValid = true;
 
-            // Name validation
             if (Name == string.Empty)
             {
                 CustomDialog.Show("The name cannot be empty.", "Validation Error");
                 isValid = false;
-            } else if (Name.Length <= 1)
+            }
+            else if (Name.Length <= 1)
             {
                 CustomDialog.Show("The Name is too short.", "Validation Error");
                 isValid = false;
             }
 
-            // Name validation
             if (!Regex.IsMatch(Lastname, @"^[a-zA-ZÀ-ÿ\s]*$"))
             {
                 CustomDialog.Show("The last name cannot contain special characters.", "Validation Error");
                 isValid = false;
             }
 
-            // Validate the DNI
-            if (!string.IsNullOrEmpty(DNI))
+            if (!IsDNIValid)
             {
-                try
-                {
-                    if (!int.TryParse(DNI.Substring(0, 8), out int numDNI))
-                    {
-                        CustomDialog.Show("Invalid DNI. The first 8 characters must be digits.", "Validation Error");
-                        isValid = false;
-                    }
-                    else
-                    {
-                        List<string> t_LletraDni = new List<string>
-                        {
-                            "T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"
-                        };
-                        string lletraDni = DNI[8].ToString().ToUpper();
-                        int calcul = numDNI % 23;
-
-                        if (lletraDni != t_LletraDni[calcul])
-                        {
-                            CustomDialog.Show(
-                                $"Invalid DNI. With the number {DNI.Substring(0, 8)} the correct letter is '{t_LletraDni[calcul]}', not '{lletraDni}'.",
-                                "Validation Error");
-                            isValid = false;
-                        }
-                    }
-                }
-                catch
-                {
-                    CustomDialog.Show("Invalid DNI format. It must be 8 digits followed by a letter.", "Validation Error");
-                    isValid = false;
-                }
-            }
-            else
-            {
-                CustomDialog.Show("The DNI cannot be empty.", "Validation Error");
+                CustomDialog.Show("Invalid DNI.", "Validation Error");
                 isValid = false;
             }
 
-            // If the phone is not null, validate it
             string digitsOnly = Phone.Replace("-", "").Replace(" ", "");
             if (!string.IsNullOrEmpty(digitsOnly))
             {
@@ -217,27 +195,9 @@ namespace WPF_MVVM_SPA_Template.ViewModels
                 }
             }
 
-            // If the mail is not null, validate it
-            if (!string.IsNullOrWhiteSpace(Mail))
+            if (!IsEmailValid)
             {
-                try
-                {
-                    var addr = new MailAddress(Mail);
-                    if (addr.Address != Mail)
-                    {
-                        CustomDialog.Show("Invalid email address.", "Validation Error");
-                        isValid = false;
-                    }
-                }
-                catch
-                {
-                    CustomDialog.Show("Invalid email address.", "Validation Error");
-                    isValid = false;
-                }
-            }
-            else
-            {
-                CustomDialog.Show("The email cannot be empty.", "Validation Error");
+                CustomDialog.Show("Invalid email address.", "Validation Error");
                 isValid = false;
             }
 

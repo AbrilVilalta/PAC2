@@ -8,6 +8,8 @@ namespace DLL_AbrilVilalta_MosiesCuartero
 {
     public partial class EmailTextBox : UserControl
     {
+        // ── DependencyProperties ────────────────────────────────────────────
+
         public static readonly DependencyProperty EmailProperty =
             DependencyProperty.Register(
                 nameof(Email),
@@ -19,25 +21,23 @@ namespace DLL_AbrilVilalta_MosiesCuartero
                     OnEmailChanged));
 
         public static readonly DependencyProperty TooltipMessageProperty =
-            DependencyProperty.Register(
-            "TooltipMessage",
-            typeof(string),
-            typeof(EmailTextBox),
-            new PropertyMetadata("ex. example@gmail.com"));
+            DependencyProperty.Register("TooltipMessage", typeof(string), typeof(EmailTextBox),
+                new PropertyMetadata("ex. example@gmail.com"));
 
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register(
-            "BorderColor",
-            typeof(Brush),
-            typeof(EmailTextBox),
-            new PropertyMetadata(Brushes.Gray));
+            DependencyProperty.Register("BorderColor", typeof(Brush), typeof(EmailTextBox),
+                new PropertyMetadata(Brushes.Gray));
 
         public static readonly DependencyProperty ErrorIndicatorVisibilityProperty =
-            DependencyProperty.Register(
-            "ErrorIndicatorVisibility",
-            typeof(Visibility),
-            typeof(EmailTextBox),
-            new PropertyMetadata(Visibility.Collapsed));
+            DependencyProperty.Register("ErrorIndicatorVisibility", typeof(Visibility), typeof(EmailTextBox),
+                new PropertyMetadata(Visibility.Collapsed));
+
+        // NOU: IsValid
+        public static readonly DependencyProperty IsValidProperty =
+            DependencyProperty.Register("IsValid", typeof(bool), typeof(EmailTextBox),
+                new PropertyMetadata(false));
+
+        // ── Propietats CLR ──────────────────────────────────────────────────
 
         public string Email
         {
@@ -63,7 +63,16 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             set => SetValue(ErrorIndicatorVisibilityProperty, value);
         }
 
+        // NOU
+        public bool IsValid
+        {
+            get => (bool)GetValue(IsValidProperty);
+            set => SetValue(IsValidProperty, value);
+        }
+
         private bool _hasBeenTouched = false;
+
+        // ── Constructor ─────────────────────────────────────────────────────
 
         public EmailTextBox()
         {
@@ -76,6 +85,7 @@ namespace DLL_AbrilVilalta_MosiesCuartero
                     _hasBeenTouched = false;
                     ErrorIndicatorVisibility = Visibility.Collapsed;
                     TooltipMessage = "ex. example@gmail.com";
+                    IsValid = false;
                     try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
                     catch { BorderColor = Brushes.Gray; }
                 }
@@ -93,29 +103,42 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             };
         }
 
+        // ── Validació ───────────────────────────────────────────────────────
+
+        private void SetError(string message)
+        {
+            TooltipMessage = message;
+            BorderColor = Brushes.LightCoral;
+            ErrorIndicatorVisibility = Visibility.Visible;
+            IsValid = false;
+        }
+
+        private void SetValid()
+        {
+            TooltipMessage = "ex. example@gmail.com";
+            ErrorIndicatorVisibility = Visibility.Collapsed;
+            IsValid = true;
+            try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
+            catch { BorderColor = Brushes.Gray; }
+        }
+
         private void ValidateEmail()
         {
             string email = EmailTextBoxControl.Text;
 
             if (string.IsNullOrEmpty(email))
             {
-                TooltipMessage = "Email cannot be empty.\nex. example@gmail.com";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
+                SetError("Email cannot be empty.\nex. example@gmail.com");
+                return;
             }
-            else if (!IsValidEmail(email))
+
+            if (!IsValidEmail(email))
             {
-                TooltipMessage = "Invalid email address.\nex. example@gmail.com";
-                BorderColor = Brushes.LightCoral;
-                ErrorIndicatorVisibility = Visibility.Visible;
+                SetError("Invalid email address.\nex. example@gmail.com");
+                return;
             }
-            else
-            {
-                TooltipMessage = "ex. example@gmail.com";
-                ErrorIndicatorVisibility = Visibility.Collapsed;
-                try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
-                catch { BorderColor = Brushes.Gray; }
-            }
+
+            SetValid();
         }
 
         private static void OnEmailChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -130,20 +153,23 @@ namespace DLL_AbrilVilalta_MosiesCuartero
             return regex.IsMatch(email);
         }
 
+        // ── Esdeveniments del TextBox ────────────────────────────────────────
+
         private void MyMaskedTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
-            var currentText = textBox?.Text;
-            var newText = currentText + e.Text;
-            var isTextValid = IsValidEmail(newText);
-            e.Handled = !isTextValid;
+            var newText = textBox?.Text + e.Text;
+            e.Handled = !IsValidEmail(newText);
         }
+
+        // ── Reset ────────────────────────────────────────────────────────────
 
         public void Reset()
         {
             _hasBeenTouched = false;
             ErrorIndicatorVisibility = Visibility.Collapsed;
             TooltipMessage = "ex. example@gmail.com";
+            IsValid = false;
             try { BorderColor = (Brush)FindResource("InputBorderBrush"); }
             catch { BorderColor = Brushes.Gray; }
         }
