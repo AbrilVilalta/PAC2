@@ -1,0 +1,420 @@
+{
+  "clients": [
+    {
+      "IdCli": 3,
+      "Name": "Marta",
+      "Lastname": "ComOdioEstimar-te",
+      "DNI": "12345678Z",
+      "Mail": "marta.comodioestimarte@gmail.com",
+      "Phone": "632134567",
+      "date": "2026-02-27T15:43:10.3054322+01:00"
+    },
+    {
+      "IdCli": 2,
+      "Name": "Xavier",
+      "Lastname": "ElTecnicDeSo",
+      "DNI": "12345678Z",
+      "Mail": "xavier.eltecnicdeso@gmail.com",
+      "Phone": "384758906",
+      "date": "2026-02-26T20:59:20.5540012+01:00"
+    },
+    {
+      "IdCli": 1,
+      "Name": "M",
+      "Lastname": "NoVullCurrarPerVoste",
+      "DNI": "12345678Z",
+      "Mail": "manela.novullcurrarpervoste@gmail.com",
+      "Phone": "283789485",
+      "date": "2026-02-26T20:57:57.9190675+01:00"
+    }
+  ],
+  "products": [
+    {
+      "idPro": 1,
+      "name": "Portàtil HP Pavilion",
+      "category": "Informàtica",
+      "price": 599.99,
+      "stock": 15
+    },
+    {
+      "idPro": 2,
+      "name": "Ratolí Logitech MX",
+      "category": "Perifèrics",
+      "price": 79.99,
+      "stock": 45
+    },
+    {
+      "idPro": 3,
+      "name": "Monitor Dell 27\"",
+      "category": "Pantalles",
+      "price": 299.99,
+      "stock": 23
+    },
+    {
+      "idPro": 4,
+      "name": "Teclat mecànic Corsair",
+      "category": "Perifèrics",
+      "price": 129.99,
+      "stock": 30
+    },
+    {
+      "idPro": 5,
+      "name": "Auriculars Sony WH-1000XM5",
+      "category": "Àudio",
+      "price": 349.99,
+      "stock": 12
+    }
+  ],
+  "clients_orders": [
+    {
+      "idOrd": 1,
+      "idPro": 3,
+      "idCli": 1,
+      "units": 4,
+      "unitPrice": 299.99,
+      "price": 1199.96,
+      "status": "Pending",
+      "date": "14/11/2025"
+    },
+    {
+      "idOrd": 2,
+      "idPro": 5,
+      "idCli": 2,
+      "units": 1,
+      "unitPrice": 349.99,
+      "price": 349.99,
+      "status": "Pending",
+      "date": "26/09/2025"
+    },
+    {
+      "idOrd": 3,
+      "idPro": 5,
+      "idCli": 2,
+      "units": 1,
+      "unitPrice": 349.99,
+      "price": 349.99,
+      "status": "Completed",
+      "date": "29/01/2026"
+    },
+    {
+      "idOrd": 4,
+      "idPro": 2,
+      "idCli": 2,
+      "units": 5,
+      "unitPrice": 79.99,
+      "price": 399.95,
+      "status": "Shipped",
+      "date": "24/10/2025"
+    },
+    {
+      "idOrd": 5,
+      "idPro": 3,
+      "idCli": 2,
+      "units": 1,
+      "unitPrice": 299.99,
+      "price": 299.99,
+      "status": "Shipped",
+      "date": "22/01/2026"
+    },
+    {
+      "idOrd": 6,
+      "idPro": 2,
+      "idCli": 3,
+      "units": 4,
+      "unitPrice": 79.99,
+      "price": 319.96,
+      "status": "Pending",
+      "date": "05/09/2025"
+    },
+    {
+      "idOrd": 7,
+      "idPro": 5,
+      "idCli": 4,
+      "units": 5,
+      "unitPrice": 349.99,
+      "price": 1749.95,
+      "status": "Shipped",
+      "date": "28/01/2026"
+    },
+    {
+      "idOrd": 8,
+      "idPro": 4,
+      "idCli": 4,
+      "units": 5,
+      "unitPrice": 129.99,
+      "price": 649.95,
+      "status": "Completed",
+      "date": "15/12/2025"
+    },
+    {
+      "idOrd": 9,
+      "idPro": 2,
+      "idCli": 4,
+      "units": 1,
+      "unitPrice": 79.99,
+      "price": 79.99,
+      "status": "Completed",
+      "date": "10/10/2025"
+    },
+    {
+      "idOrd": 10,
+      "idPro": 3,
+      "idCli": 4,
+      "units": 4,
+      "unitPrice": 299.99,
+      "price": 1199.96,
+      "status": "Completed",
+      "date": "04/01/2026"
+    },
+    {
+      "idOrd": 11,
+      "idPro": 4,
+      "idCli": 4,
+      "units": 4,
+      "unitPrice": 129.99,
+      "price": 519.96,
+      "status": "Completed",
+      "date": "05/03/2026"
+    },
+    {
+      "idOrd": 12,
+      "idPro": 4,
+      "idCli": 4,
+      "units": 1,
+      "unitPrice": 129.99,
+      "price": 129.99,
+      "status": "Shipped",
+      "date": "28/11/2025"
+    },
+    {
+      "idOrd": 13,
+      "idPro": 1,
+      "idCli": 4,
+      "units": 1,
+      "unitPrice": 599.99,
+      "price": 599.99,
+      "status": "Completed",
+      "date": "23/10/2025"
+    },
+    {
+      "idOrd": 14,
+      "idPro": 1,
+      "idCli": 4,
+      "units": 2,
+      "unitPrice": 599.99,
+      "price": 1199.98,
+      "status": "Shipped",
+      "date": "09/02/2026"
+    },
+    {
+      "idOrd": 15,
+      "idPro": 3,
+      "idCli": 3,
+      "units": 4,
+      "unitPrice": 299.99,
+      "price": 1199.96,
+      "status": "Shipped",
+      "date": "22/12/2025"
+    },
+    {
+      "idOrd": 16,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 3,
+      "unitPrice": 599.99,
+      "price": 1799.97,
+      "status": "Shipped",
+      "date": "06/01/2026"
+    },
+    {
+      "idOrd": 17,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 2,
+      "unitPrice": 599.99,
+      "price": 1199.98,
+      "status": "Completed",
+      "date": "04/02/2026"
+    },
+    {
+      "idOrd": 18,
+      "idPro": 3,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 299.99,
+      "price": 1499.95,
+      "status": "Shipped",
+      "date": "18/10/2025"
+    },
+    {
+      "idOrd": 19,
+      "idPro": 2,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 79.99,
+      "price": 399.95,
+      "status": "Pending",
+      "date": "05/12/2025"
+    },
+    {
+      "idOrd": 20,
+      "idPro": 5,
+      "idCli": 3,
+      "units": 2,
+      "unitPrice": 349.99,
+      "price": 699.98,
+      "status": "Shipped",
+      "date": "03/03/2026"
+    },
+    {
+      "idOrd": 21,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 599.99,
+      "price": 599.99,
+      "status": "Pending",
+      "date": "13/03/2026"
+    },
+    {
+      "idOrd": 22,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 129.99,
+      "price": 649.95,
+      "status": "Pending",
+      "date": "03/03/2026"
+    },
+    {
+      "idOrd": 23,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 2,
+      "unitPrice": 129.99,
+      "price": 259.98,
+      "status": "Completed",
+      "date": "08/01/2026"
+    },
+    {
+      "idOrd": 24,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 129.99,
+      "price": 649.95,
+      "status": "Pending",
+      "date": "23/09/2025"
+    },
+    {
+      "idOrd": 25,
+      "idPro": 5,
+      "idCli": 3,
+      "units": 4,
+      "unitPrice": 349.99,
+      "price": 1399.96,
+      "status": "Completed",
+      "date": "29/09/2025"
+    },
+    {
+      "idOrd": 26,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 599.99,
+      "price": 2999.95,
+      "status": "Shipped",
+      "date": "11/01/2026"
+    },
+    {
+      "idOrd": 27,
+      "idPro": 2,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 79.99,
+      "price": 79.99,
+      "status": "Shipped",
+      "date": "14/01/2026"
+    },
+    {
+      "idOrd": 28,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 129.99,
+      "price": 129.99,
+      "status": "Completed",
+      "date": "14/02/2026"
+    },
+    {
+      "idOrd": 29,
+      "idPro": 3,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 299.99,
+      "price": 299.99,
+      "status": "Pending",
+      "date": "05/11/2025"
+    },
+    {
+      "idOrd": 30,
+      "idPro": 3,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 299.99,
+      "price": 1499.95,
+      "status": "Pending",
+      "date": "27/11/2025"
+    },
+    {
+      "idOrd": 31,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 129.99,
+      "price": 129.99,
+      "status": "Pending",
+      "date": "19/12/2025"
+    },
+    {
+      "idOrd": 32,
+      "idPro": 4,
+      "idCli": 3,
+      "units": 5,
+      "unitPrice": 129.99,
+      "price": 649.95,
+      "status": "Pending",
+      "date": "16/11/2025"
+    },
+    {
+      "idOrd": 33,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 3,
+      "unitPrice": 599.99,
+      "price": 1799.97,
+      "status": "Pending",
+      "date": "02/11/2025"
+    },
+    {
+      "idOrd": 34,
+      "idPro": 3,
+      "idCli": 3,
+      "units": 3,
+      "unitPrice": 299.99,
+      "price": 899.97,
+      "status": "Shipped",
+      "date": "29/09/2025"
+    },
+    {
+      "idOrd": 35,
+      "idPro": 1,
+      "idCli": 3,
+      "units": 1,
+      "unitPrice": 599.99,
+      "price": 599.99,
+      "status": "Pending",
+      "date": "22/02/2026"
+    }
+  ]
+}

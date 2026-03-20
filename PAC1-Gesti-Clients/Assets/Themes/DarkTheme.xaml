@@ -1,0 +1,74 @@
+﻿
+<!--
+    ════════════════════════════════════════════════════════════════════
+    ░  BRUSH RESOURCE DICTIONARY (DARK THEME)
+    ════════════════════════════════════════════════════════════════════
+     Contains all the color brushes for the dark theme
+    ════════════════════════════════════════════════════════════════════
+-->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- General -->
+    <SolidColorBrush x:Key="MainBackgroundBrush"                   Color="#0F1117"/>
+    <SolidColorBrush x:Key="PrimaryTextBrush"                      Color="#E8E9F0"/>
+    <SolidColorBrush x:Key="SecondaryTextBrush"                    Color="#8B8FA8"/>
+    <SolidColorBrush x:Key="ThemeIconColor"                        Color="#C5C8E0"/>
+    <SolidColorBrush x:Key="DividerBrush"                          Color="#1E2030"/>
+
+    <!-- Sidebar -->
+    <SolidColorBrush x:Key="SidebarBackgroundBrush"                Color="#13151F"/>
+    <SolidColorBrush x:Key="SidebarForegroundBrush"                Color="#9DA3BE"/>
+    <SolidColorBrush x:Key="SidebarHoverBackgroundBrush"           Color="#1C1F2E"/>
+    <SolidColorBrush x:Key="SidebarSelectedBackgroundBrush"        Color="#252A3D"/>
+    <SolidColorBrush x:Key="SidebarAccentBrush"                    Color="#7C6AF5"/>
+
+    <!-- Primary button -->
+    <SolidColorBrush x:Key="PrimaryButtonForegroundBrush"          Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="PrimaryButtonBackgroundBrush"          Color="#5B4EE8"/>
+    <SolidColorBrush x:Key="PrimaryButtonBorderBrush"              Color="#7C6AF5"/>
+    <SolidColorBrush x:Key="PrimaryButtonHoverBackgroundBrush"     Color="#7C6AF5"/>
+    <SolidColorBrush x:Key="PrimaryButtonDisabledBackgroundBrush"  Color="#252A3D"/>
+    <SolidColorBrush x:Key="PrimaryButtonDisabledBorderBrush"      Color="#2E334D"/>
+    <SolidColorBrush x:Key="PrimaryButtonDisabledForegroundBrush"  Color="#4A5080"/>
+
+    <!-- Secondary button -->
+    <SolidColorBrush x:Key="SecondaryButtonForegroundBrush"          Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SecondaryButtonBackgroundBrush"          Color="#8B1A2A"/>
+    <SolidColorBrush x:Key="SecondaryButtonBorderBrush"              Color="#B02035"/>
+    <SolidColorBrush x:Key="SecondaryButtonHoverBackgroundBrush"     Color="#B02035"/>
+    <SolidColorBrush x:Key="SecondaryButtonDisabledBackgroundBrush"  Color="#2E1820"/>
+    <SolidColorBrush x:Key="SecondaryButtonDisabledBorderBrush"      Color="#3D1E27"/>
+    <SolidColorBrush x:Key="SecondaryButtonDisabledForegroundBrush"  Color="#6B3040"/>
+
+    <!-- DataGrid -->
+    <SolidColorBrush x:Key="DataGridBackgroundBrush"               Color="#13151F"/>
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush"         Color="#0F1117"/>
+    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush"         Color="#5B6080"/>
+    <SolidColorBrush x:Key="DataGridForegroundBrush"               Color="#C8CADC"/>
+    <SolidColorBrush x:Key="DataGridRowBackgroundBrush"            Color="#13151F"/>
+    <SolidColorBrush x:Key="DataGridRowAlternateBackgroundBrush"   Color="#161922"/>
+    <SolidColorBrush x:Key="DataGridGridLinesBrush"                Color="#1C1F2E"/>
+    <SolidColorBrush x:Key="DataGridSelectionBackgroundBrush"      Color="#252A3D"/>
+    <SolidColorBrush x:Key="DataGridSelectionForegroundBrush"      Color="#E8E9F0"/>
+
+    <!-- Input -->
+    <SolidColorBrush x:Key="InputBackgroundBrush"                  Color="#161922"/>
+    <SolidColorBrush x:Key="InputBorderBrush"                      Color="#252A3D"/>
+    <SolidColorBrush x:Key="InputFocusBorderBrush"                 Color="#7C6AF5"/>
+    <SolidColorBrush x:Key="InputForegroundBrush"                  Color="#E8E9F0"/>
+    <SolidColorBrush x:Key="InputPlaceholderBrush"                 Color="#484D6A"/>
+    <SolidColorBrush x:Key="InputHoverBorderBrush"                 Color="#3A3F60"/>
+
+    <!-- Card -->
+    <SolidColorBrush x:Key="CardBackgroundBrush"                   Color="#161922"/>
+    <SolidColorBrush x:Key="CardBorderBrush"                       Color="#1C1F2E"/>
+
+    <!-- Status -->
+    <SolidColorBrush x:Key="SuccessBrush"                          Color="#2DD4A0"/>
+    <SolidColorBrush x:Key="WarningBrush"                          Color="#F5A623"/>
+    <SolidColorBrush x:Key="ErrorBrush"                            Color="#F05070"/>
+    <SolidColorBrush x:Key="InfoBrush"                             Color="#7C6AF5"/>
+
+</ResourceDictionary>

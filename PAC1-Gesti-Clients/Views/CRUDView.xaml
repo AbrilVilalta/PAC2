@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="WPF_MVVM_SPA_Template.Views.CRUDView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPF_MVVM_SPA_Template.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="ColTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"       Value="{DynamicResource DataGridForegroundBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource MainBackgroundBrush}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid ItemsSource="{Binding Clients}"
+                  SelectedItem="{Binding SelectedClient}"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  Grid.Row="0"
+                  Background="{DynamicResource DataGridBackgroundBrush}"
+                  RowBackground="{DynamicResource DataGridRowBackgroundBrush}"
+                  AlternatingRowBackground="{DynamicResource DataGridRowAlternateBackgroundBrush}"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="{DynamicResource DataGridGridLinesBrush}"
+                  BorderThickness="0"
+                  ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeaderStyle}"
+                  RowStyle="{StaticResource ModernDataGridRowStyle}"
+                  CellStyle="{StaticResource ModernDataGridCellStyle}"
+                  CanUserResizeRows="False"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"
+                                    Binding="{Binding IdCli}"
+                                    Width="Auto"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="Lastname"
+                                    Binding="{Binding Lastname}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="DNI"
+                                    Binding="{Binding DNI}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="Email"
+                                    Binding="{Binding Mail}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="Phone"
+                                    Binding="{Binding Phone}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTextColumn Header="Created At"
+                                    Binding="{Binding CreatedAt}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource ColTextStyle}"/>
+                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Edit"
+                                        Command="{Binding DataContext.FromEditCommand,
+                                            RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Margin="2" Padding="6,3"
+                                        Style="{StaticResource ModernPrimaryButtonStyle}"/>
+                                <Button Content="Delete"
+                                        Command="{Binding DataContext.DelClientCommand,
+                                            RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Margin="2" Padding="6,3"
+                                        Style="{StaticResource ModernSecundaryButtonStyle}"/>
+                                <Button Content="Graphic"
+                                        Command="{Binding DataContext.GraphicCommand,
+                                            RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Margin="2" Padding="6,3"
+                                        Style="{StaticResource ModernTertiaryButtonStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Content="Add"
+                    Command="{Binding FromAddCommand}"
+                    CommandParameter="{x:Null}"
+                    Margin="5" Padding="10,5"
+                    Style="{StaticResource ModernPrimaryButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

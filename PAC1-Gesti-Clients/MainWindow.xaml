@@ -1,0 +1,30 @@
+﻿<Window x:Class="WPF_MVVM_SPA_Template.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_MVVM_SPA_Template"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="900"
+        Background="{DynamicResource MainBackgroundBrush}">
+
+    <DockPanel>
+        <!-- Side navigation bar -->
+        <ListBox DockPanel.Dock="Left"
+                 Style="{StaticResource SidebarListBoxStyle}"
+                 SelectedValue="{Binding SelectedView, Mode=TwoWay}"
+                 SelectedValuePath="Tag">
+
+            <ListBoxItem Content="Home"     Tag="Home"    Style="{StaticResource ModernSidebarStyle}"/>
+            <ListBoxItem Content="Client"   Tag="Client"  Style="{StaticResource ModernSidebarStyle}"/>
+            <ListBoxItem Content="Settings" Tag="Setting" Style="{StaticResource ModernSidebarStyle}"/>
+        </ListBox>
+
+        <!-- Dynamic content section -->
+        <Grid Name="MainContent"
+              Background="{DynamicResource MainBackgroundBrush}"
+              Margin="10">
+            <ContentControl Content="{Binding CurrentView}" />
+        </Grid>
+    </DockPanel>
+</Window>

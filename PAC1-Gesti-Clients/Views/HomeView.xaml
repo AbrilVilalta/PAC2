@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="WPF_MVVM_SPA_Template.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPF_MVVM_SPA_Template.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource MainBackgroundBrush}">
+
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="CardShadow"
+                          BlurRadius="18" ShadowDepth="2"
+                          Opacity="0.18" Color="#000000"/>
+
+        <Style x:Key="StatCardBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding"      Value="18,14"/>
+            <Setter Property="Effect"       Value="{StaticResource CardShadow}"/>
+        </Style>
+
+        <Style x:Key="CardTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize"   Value="{DynamicResource font-size-xs}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Opacity"    Value="0.75"/>
+            <Setter Property="Margin"     Value="0,0,0,4"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="CardValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize"   Value="{DynamicResource font-size-lg}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize"   Value="{DynamicResource font-size-sm}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            <Setter Property="Margin"     Value="0,0,0,10"/>
+        </Style>
+
+        <!-- ElementStyle for DataGrid columns -->
+        <Style x:Key="ColTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"        Value="{DynamicResource DataGridForegroundBrush}"/>
+            <Setter Property="FontSize"          Value="{DynamicResource font-size-sm}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- ===== Line 0: Stat cards ===== -->
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Total Income -->
+                <Border Grid.Column="0" Style="{StaticResource StatCardBorder}" Margin="0,0,10,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#5B4EE8" Offset="0"/>
+                            <GradientStop Color="#3A2FC4" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="💰  TOTAL INCOME" Style="{StaticResource CardTitleStyle}"/>
+                        <TextBlock Text="{Binding TotalIncome}" Style="{StaticResource CardValueStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Income This Month -->
+                <Border Grid.Column="1" Style="{StaticResource StatCardBorder}" Margin="0,0,10,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#7C6AF5" Offset="0"/>
+                            <GradientStop Color="#5B4EE8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="📅  THIS MONTH" Style="{StaticResource CardTitleStyle}"/>
+                        <TextBlock Text="{Binding IncomeMonth}" Style="{StaticResource CardValueStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Best Month -->
+                <Border Grid.Column="2" Style="{StaticResource StatCardBorder}" Margin="0,0,10,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#4A3ED4" Offset="0"/>
+                            <GradientStop Color="#2D1FA8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="🏆  BEST MONTH" Style="{StaticResource CardTitleStyle}"/>
+                        <TextBlock Text="{Binding BestSellingMonth}" Style="{StaticResource CardValueStyle}"/>
+                        <TextBlock Text="{Binding IncomeOfbestSellingMonth}"
+                                   FontSize="{DynamicResource font-size-xs}"
+                                   Foreground="White" Opacity="0.8" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Total Clients -->
+                <Border Grid.Column="3" Style="{StaticResource StatCardBorder}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#8B1A2A" Offset="0"/>
+                            <GradientStop Color="#C0304A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Text="👥  TOTAL CLIENTS" Style="{StaticResource CardTitleStyle}"/>
+                        <TextBlock Text="{Binding TotalClients}" Style="{StaticResource CardValueStyle}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ===== ROW 1: Graph + Top Clients ===== -->
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Graph -->
+                <Border Grid.Column="0"
+                        Background="{DynamicResource CardBackgroundBrush}"
+                        BorderBrush="{DynamicResource CardBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Margin="0,0,10,0">
+                    <oxy:PlotView Model="{Binding PlotModel}"
+                                  Background="Transparent"/>
+                </Border>
+
+                <!-- Top Clients -->
+                <StackPanel Grid.Column="1">
+
+                    <!-- Título con fuente y tamaño dinámicos -->
+                    <TextBlock Text="Top 5 Clients:"
+                               FontSize="{DynamicResource font-size-sm}"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource PrimaryTextBrush}"
+                               Margin="0,0,0,8"/>
+
+                    <DataGrid IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Clients}"
+                              VerticalAlignment="Top"
+                              MaxHeight="220"
+                              Background="{DynamicResource DataGridBackgroundBrush}"
+                              RowBackground="{DynamicResource DataGridRowBackgroundBrush}"
+                              AlternatingRowBackground="{DynamicResource DataGridRowAlternateBackgroundBrush}"
+                              GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="{DynamicResource DataGridGridLinesBrush}"
+                              BorderThickness="1"
+                              BorderBrush="{DynamicResource CardBorderBrush}"
+                              ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeaderStyle}"
+                              RowStyle="{StaticResource ModernDataGridRowStyle}"
+                              CellStyle="{StaticResource ModernDataGridCellStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id"
+                                                Binding="{Binding IdCli}"
+                                                Width="Auto"
+                                                ElementStyle="{StaticResource ColTextStyle}"/>
+                            <DataGridTextColumn Header="Name"
+                                                Binding="{Binding Name}"
+                                                Width="*"
+                                                ElementStyle="{StaticResource ColTextStyle}"/>
+                            <DataGridTextColumn Header="Lastname"
+                                                Binding="{Binding Lastname}"
+                                                Width="*"
+                                                ElementStyle="{StaticResource ColTextStyle}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

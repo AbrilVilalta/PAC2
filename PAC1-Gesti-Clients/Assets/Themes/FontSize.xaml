@@ -1,0 +1,27 @@
+﻿
+<!--
+    ════════════════════════════════════════════════════════════════════
+    ░  FONT SIZE RESOURCE DICTIONARY
+    ════════════════════════════════════════════════════════════════════
+     Contains the different font sizes of the application
+    ════════════════════════════════════════════════════════════════════
+-->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:font="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- xmlns:font="clr-namespace:System;assembly=System.Runtime 
+         - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+         Imports the .NET System namespace so XAML can
+         use types like Double, String... -->
+
+    <font:Double x:Key="font-size-xs">13</font:Double>
+    <font:Double x:Key="font-size-sm">14</font:Double>
+    <font:Double x:Key="font-size-base">15</font:Double>
+    <font:Double x:Key="font-size-lg">18</font:Double>
+    <font:Double x:Key="font-size-xl">24</font:Double>
+    <font:Double x:Key="font-size-2xl">32</font:Double>
+    <font:Double x:Key="font-size-3xl">48</font:Double>
+
+</ResourceDictionary>
