@@ -117,6 +117,27 @@ namespace WPF_MVVM_SPA_Template.ViewModels
             set { _isEmailValid = value; OnPropertyChanged(); }
         }
 
+        private bool _isNameValid = false;
+        public bool IsNameValid
+        {
+            get => _isNameValid;
+            set { _isNameValid = value; OnPropertyChanged(); }
+        }
+
+        private bool _isLastNameValid = false;
+        public bool IsLastNameValid
+        {
+            get => _isLastNameValid;
+            set { _isLastNameValid = value; OnPropertyChanged(); }
+        }
+
+        private bool _isPhoneValid = false;
+        public bool IsPhoneValid
+        {
+            get => _isPhoneValid;
+            set { _isPhoneValid = value; OnPropertyChanged(); }
+        }
+
         /* ════════════════════════════════════════════════════════════════════════
          * Currently selected client — also notifies CreatedAtDisplay when changed
          * ════════════════════════════════════════════════════════════════════════ */
@@ -162,20 +183,15 @@ namespace WPF_MVVM_SPA_Template.ViewModels
         {
             bool isValid = true;
 
-            if (Name == string.Empty)
+            if (!IsNameValid)
             {
-                CustomDialog.Show("The name cannot be empty.", "Validation Error");
-                isValid = false;
-            }
-            else if (Name.Length <= 1)
-            {
-                CustomDialog.Show("The Name is too short.", "Validation Error");
+                CustomDialog.Show("Invalid Name.", "Validation Error");
                 isValid = false;
             }
 
-            if (!Regex.IsMatch(Lastname, @"^[a-zA-ZÀ-ÿ\s]*$"))
+            if (!IsLastNameValid)
             {
-                CustomDialog.Show("The last name cannot contain special characters.", "Validation Error");
+                CustomDialog.Show("Invalid LastName.", "Validation Error");
                 isValid = false;
             }
 
@@ -185,14 +201,10 @@ namespace WPF_MVVM_SPA_Template.ViewModels
                 isValid = false;
             }
 
-            string digitsOnly = Phone.Replace("-", "").Replace(" ", "");
-            if (!string.IsNullOrEmpty(digitsOnly))
+            if (!IsPhoneValid)
             {
-                if (digitsOnly.Length < 9 || !int.TryParse(digitsOnly, out _))
-                {
-                    CustomDialog.Show("Invalid phone number. It must have at least 9 digits.", "Validation Error");
-                    isValid = false;
-                }
+                CustomDialog.Show("Invalid phone address.", "Validation Error");
+                isValid = false;
             }
 
             if (!IsEmailValid)
