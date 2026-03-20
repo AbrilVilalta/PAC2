@@ -7,38 +7,67 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WPF-MVVM-SPA-Template;component/Assets/Themes/DarkTheme.xaml"/>
+                <ResourceDictionary Source="/WPF-MVVM-SPA-Template;component/Assets/Themes/GlobalStyles.xaml"/>
+                <ResourceDictionary Source="/WPF-MVVM-SPA-Template;component/Assets/Themes/FontSize.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
+            <!-- TextBox takes all available space -->
             <ColumnDefinition Width="*"/>
+            <!-- Fixed width for the error indicator circle -->
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Main TextBox input -->
         <TextBox x:Name="PhoneTextBoxControl"
                  Grid.Column="0"
                  Style="{StaticResource ModernTextBoxStyle}"
                  Tag="123456789"
-                 BorderBrush="{Binding BorderColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                 Text="{Binding Phone, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                 ToolTip="{Binding TooltipMessage, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 BorderBrush="{Binding BorderColor, 
+                     RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 Text="{Binding Phone, Mode=TwoWay, 
+                     RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 ToolTip="{Binding TooltipMessage, 
+                     RelativeSource={RelativeSource AncestorType=UserControl}}"
                  ToolTipService.IsEnabled="True"/>
 
-        <!-- Error circle -->
-        <Grid x:Name="ErrorIndicator"
-             Grid.Column="1"
-             Width="18" Height="18"
-             Margin="6,0,0,0"
-             VerticalAlignment="Center"
-             Tag="{Binding TooltipMessage, RelativeSource={RelativeSource AncestorType=UserControl}}"
-             Visibility="{Binding ErrorIndicatorVisibility, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                    <Grid.ToolTip>
-                        <ToolTip Content="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"/>
-                    </Grid.ToolTip>
-                    <Ellipse Fill="LightCoral" Width="18" Height="18"/>
-                    <TextBlock Text="!"
-                    FontWeight="Bold" FontSize="11"
-                    Foreground="White"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
-        </Grid>
+        <!-- Error indicator: red circle with "!" shown only when invalid -->
+        <Ellipse Grid.Column="1"
+                 Width="18"
+                 Height="18"
+                 Margin="6,0,0,0"
+                 VerticalAlignment="Center"
+                 Fill="LightCoral"
+                 Visibility="{Binding ErrorIndicatorVisibility, 
+                     RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <Ellipse.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{Binding TooltipMessage, 
+                                   RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               MaxWidth="220"
+                               TextWrapping="Wrap"/>
+                </ToolTip>
+            </Ellipse.ToolTip>
+        </Ellipse>
+
+        <!-- "!" label inside the error circle -->
+        <TextBlock Grid.Column="1"
+                   Text="!"
+                   FontWeight="Bold"
+                   FontSize="11"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="6,0,0,0"
+                   IsHitTestVisible="False"
+                   Visibility="{Binding ErrorIndicatorVisibility, 
+                       RelativeSource={RelativeSource AncestorType=UserControl}}"/>
     </Grid>
 </UserControl>
