@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,9 +19,9 @@ namespace WPF_MVVM_SPA_Template.Views
     /// <summary>
     /// Lógica de interacción para Form.xaml
     /// </summary>
-    public partial class Form : UserControl
+    public partial class FormView : UserControl
     {
-        public Form()
+        public FormView()
         {
             InitializeComponent();
         }

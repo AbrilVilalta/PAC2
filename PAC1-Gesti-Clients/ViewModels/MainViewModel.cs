@@ -22,7 +22,7 @@ namespace WPF_MVVM_SPA_Template.ViewModels
         private readonly HomeView _homeView;
         private readonly CRUDView _crudView;
         private readonly SettingView _settingView;
-        private readonly Form _formView;
+        private readonly FormView _formView;
         private readonly GraphicView _graphicView;
 
         /* ════════════════════════════════════════════════════════════════
@@ -171,7 +171,7 @@ namespace WPF_MVVM_SPA_Template.ViewModels
             _homeView = new HomeView { DataContext = HomeVM };
             _crudView = new CRUDView { DataContext = CrudVM };
             _settingView = new SettingView { DataContext = SettingVM };
-            _formView = new Form { DataContext = FormVM };
+            _formView = new FormView { DataContext = FormVM };
             _graphicView = new GraphicView { DataContext = GraphicVM };
 
             // Navigate to the Home view as the default starting page.
