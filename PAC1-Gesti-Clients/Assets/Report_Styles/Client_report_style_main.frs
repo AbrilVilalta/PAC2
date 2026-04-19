@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Styles>
+  <Style Name="Client_report_style" Font="Calibri, 12pt"/>
+  <Style Name="l" Font="Arial, 10pt"/>
+</Styles>
