@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/19/2026 13:27:10" ReportInfo.Modified="04/19/2026 15:31:14" ReportInfo.CreatorVersion="2026.2.0.0">
+  <Styles>
+    <Style Name="Client_report_style" Font="Calibri, 12pt"/>
+    <Style Name="Client_report_tittle" Font="Merriweather Black 18pt, 22pt, style=Bold"/>
+  </Styles>
+  <Dictionary/>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="47.25">
+      <TextObject Name="Text1" Left="179.55" Width="387.45" Height="28.35" Text="INFORME DEL CLIENTE" Font="Merriweather Black 18pt, 22pt, style=Bold" Style="Client_report_tittle"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="51.25" Width="718.2" Height="28.35"/>
+    <DataBand Name="Data1" Top="83.6" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Top="163.2" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>
