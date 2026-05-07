@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" DoublePass="true" ReportInfo.Author="Admin" ReportInfo.Version="1.0.0" ReportInfo.Created="05/04/2026 16:39:48" ReportInfo.Modified="05/07/2026 02:23:00" ReportInfo.CreatorVersion="2026.2.0.0">
+  <Styles>
+    <Style Name="Client_report_style" Font="Calibri, 14pt"/>
+    <Style Name="Client_report_tittle" Font="Microsoft Sans Serif, 22pt, style=Bold"/>
+    <Style Name="Client_report_style_2" Border.Lines="All" Font="Calibri, 12pt"/>
+  </Styles>
+  <Dictionary>
+    <JsonDataConnection Name="ClientsReport" ConnectionString="rijcmlqodwWdIGpYa/t7mJl0nlwe5DJWgTdpXubfrDa5HHIHIvrMQsSSxjAYQTzb2/eSAlXm8s/xNDFQmajqU4vtcw+r2c11w5Mzazr7o5muc0W754=">
+      <TableDataSource Name="Clients" DataType="System.Int32" Enabled="true" TableName="Clients">
+        <Column Name="IdCli" DataType="System.Int32"/>
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Lastname" DataType="System.String"/>
+        <Column Name="DNI" DataType="System.String"/>
+        <Column Name="Mail" DataType="System.String"/>
+        <Column Name="Phone" DataType="System.String"/>
+        <Column Name="Date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="Products" DataType="System.Int32" Enabled="true" TableName="Products">
+        <Column Name="IdPro" DataType="System.Int32"/>
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Category" DataType="System.String"/>
+        <Column Name="Price" DataType="System.Double"/>
+        <Column Name="Stock" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="ClientsOrders" DataType="System.Int32" Enabled="true" TableName="ClientsOrders">
+        <Column Name="IdOrd" DataType="System.Int32"/>
+        <Column Name="IdPro" DataType="System.Int32"/>
+        <Column Name="IdCli" DataType="System.Int32"/>
+        <Column Name="Units" DataType="System.Int32"/>
+        <Column Name="UnitPrice" DataType="System.Double"/>
+        <Column Name="Price" DataType="System.Double"/>
+        <Column Name="Status" DataType="System.String"/>
+        <Column Name="Date" DataType="System.String"/>
+      </TableDataSource>
+    </JsonDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Guides="226.8" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7">
+      <TextObject Name="Text1" Left="160.65" Top="9.45" Width="406.35" Height="28.35" Text="Informe de Clientes de 2026" Font="Microsoft Sans Serif, 22pt, style=Bold" Style="Client_report_tittle"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="151.2">
+      <TextObject Name="Text2" Left="500.85" Top="9.45" Width="217.35" Height="18.9" Text="REF[DateTime.Now.ToString(&quot;yyyyMMddHHmmss&quot;)]GEN" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text3" Left="616.14" Top="37.8" Width="94.5" Height="28.35" Text="v[Report.ReportInfo.Version]" HorzAlign="Right" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text4" Top="9.45" Width="132.3" Height="18.9" Text="Autor: [Report.ReportInfo.Author]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text5" Top="66.15" Width="274.05" Height="18.9" Text="Válido hasta: [DateTime.Now.AddDays(30).ToString(&quot;dd/MM/yyyy&quot;)]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text6" Top="37.8" Width="217.35" Height="18.9" Text="USO INTERNO EXCLUSIVO" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text9" Top="122.85" Width="28.35" Height="18.9" Text="ID" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text10" Left="37.8" Top="122.85" Width="75.6" Height="18.9" Text="Nombre" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text11" Left="141.75" Top="122.85" Width="94.5" Height="18.9" Text="Apellido" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text12" Left="274.05" Top="122.85" Width="47.25" Height="18.9" Text="DNI" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text13" Left="453.6" Top="122.85" Width="56.7" Height="18.9" Text="Email" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text14" Left="652.05" Top="122.85" Width="47.25" Height="18.9" Text="Tlfn" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="215.9" Width="718.2" Height="50.4" Style="Client_report_style" DataSource="Clients">
+      <TableObject Name="Table1" Width="724.3" Height="50.4">
+        <TableColumn Name="Column1" Width="31.17"/>
+        <TableColumn Name="Column2" Width="93.92"/>
+        <TableColumn Name="Column3" Width="125.69"/>
+        <TableColumn Name="Column4" Width="87.91"/>
+        <TableColumn Name="Column5" Width="286.4"/>
+        <TableColumn Name="Column6" Width="99.21"/>
+        <TableRow Name="Row2" Height="50.4">
+          <TableCell Name="Cell6" Border.Lines="All" Text="[Clients.IdCli]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[Clients.Name]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[Clients.Lastname]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="[Clients.DNI]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Clients.Mail]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="[Clients.Phone]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 12pt"/>
+        </TableRow>
+      </TableObject>
+      <Sort>
+        <Sort Expression="[Clients.IdCli]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="270.3" Width="718.2" Height="37.8">
+      <TextObject Name="Text7" Top="9.45" Width="141.75" Height="28.35" Text="[Page] / [TotalPages]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text8" Left="500.85" Top="9.45" Width="217.35" Height="18.9" Text="Generado el: [Date]" Font="Calibri, 14pt" Style="Client_report_style"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>
