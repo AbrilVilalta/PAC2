@@ -195,6 +195,11 @@
                     </DataGrid>
 
                     <Button x:Name="BtnExportarPDF" Margin="0 30" 
+                        Height="40"
+                        Padding="20,0"
+                        FontSize="{DynamicResource font-size-base}"
+                        FontWeight="SemiBold"
+                        Style="{StaticResource ModernPrimaryButtonStyle}"
                         Content="Exportar a PDF" 
                         Click="BtnExportarPDF_Click"/>
 
