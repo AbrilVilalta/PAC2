@@ -193,6 +193,11 @@
                                                 ElementStyle="{StaticResource ColTextStyle}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button x:Name="BtnExportarPDF" Margin="0 30" 
+                        Content="Exportar a PDF" 
+                        Click="BtnExportarPDF_Click"/>
+
                 </StackPanel>
 
             </Grid>

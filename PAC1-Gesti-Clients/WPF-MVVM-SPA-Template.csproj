@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FastReport.Data.Json" Version="2026.2.1" />
+    <PackageReference Include="FastReport.OpenSource" Version="2026.2.1" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2026.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
@@ -27,6 +30,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DLL_AbrilVilalta_MosiesCuartero\DLL_AbrilVilalta_MosiesCuartero.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Report_clients.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

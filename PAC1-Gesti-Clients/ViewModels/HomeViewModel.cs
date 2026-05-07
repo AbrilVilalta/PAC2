@@ -3,16 +3,22 @@
  * HOMEVIEWMODEL
  * ════════════════════════════════════════════ */
 
+using FastReport;
+using FastReport.Data;
+using FastReport.Export.PdfSimple;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using WPF_MVVM_SPA_Template.Models;
 using WPF_MVVM_SPA_Template.Services;
+using System.Collections.Generic;
 
 namespace WPF_MVVM_SPA_Template.ViewModels
 {
@@ -340,10 +346,10 @@ namespace WPF_MVVM_SPA_Template.ViewModels
             }
         }
 
-        /* ════════════════════════════════════════════════════════════════════
-         * Constructor: initializes services, loads data and sets up commands
-         * ════════════════════════════════════════════════════════════════════ */
-        public HomeViewModel(MainViewModel mainViewModel)
+    /* ════════════════════════════════════════════════════════════════════
+     * Constructor: initializes services, loads data and sets up commands
+     * ════════════════════════════════════════════════════════════════════ */
+    public HomeViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
             _clientService = new ClientService();
