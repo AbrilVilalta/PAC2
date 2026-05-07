@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" DoublePass="true" ReportInfo.Author="Admin" ReportInfo.Version="1.0.0" ReportInfo.Created="05/04/2026 16:39:48" ReportInfo.Modified="05/07/2026 02:23:00" ReportInfo.CreatorVersion="2026.2.0.0">
+<Report ScriptLanguage="CSharp" DoublePass="true" ReportInfo.Author="Admin" ReportInfo.Version="1.0.0" ReportInfo.Created="05/04/2026 16:39:48" ReportInfo.Modified="05/07/2026 18:23:36" ReportInfo.CreatorVersion="2026.2.0.0">
   <Styles>
     <Style Name="Client_report_style" Font="Calibri, 14pt"/>
     <Style Name="Client_report_tittle" Font="Microsoft Sans Serif, 22pt, style=Bold"/>
     <Style Name="Client_report_style_2" Border.Lines="All" Font="Calibri, 12pt"/>
   </Styles>
   <Dictionary>
-    <JsonDataConnection Name="ClientsReport" ConnectionString="rijcmlqodwWdIGpYa/t7mJl0nlwe5DJWgTdpXubfrDa5HHIHIvrMQsSSxjAYQTzb2/eSAlXm8s/xNDFQmajqU4vtcw+r2c11w5Mzazr7o5muc0W754=">
+    <JsonDataConnection Name="ClientsReport" ConnectionString="rijcmlqodwWdIGpYa/t7mJl0nlwe5DJWgTdpXubfrDa5HHIHIvrMQsSSxjAYQTzb2/eSAlXm8s/xNDFQmajqU4vtcw+r6RIIMsDN2X91MoSaTUnVvg=">
       <TableDataSource Name="Clients" DataType="System.Int32" Enabled="true" TableName="Clients">
         <Column Name="IdCli" DataType="System.Int32"/>
         <Column Name="Name" DataType="System.String"/>
@@ -37,20 +37,20 @@
   </Dictionary>
   <ReportPage Name="Page1" Guides="226.8" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7">
-      <TextObject Name="Text1" Left="160.65" Top="9.45" Width="406.35" Height="28.35" Text="Informe de Clientes de 2026" Font="Microsoft Sans Serif, 22pt, style=Bold" Style="Client_report_tittle"/>
+      <TextObject Name="Text1" Left="198.45" Top="9.45" Width="330.75" Height="28.35" Text="2026 Customer Report" Font="Microsoft Sans Serif, 22pt, style=Bold" Style="Client_report_tittle"/>
     </ReportTitleBand>
     <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="151.2">
       <TextObject Name="Text2" Left="500.85" Top="9.45" Width="217.35" Height="18.9" Text="REF[DateTime.Now.ToString(&quot;yyyyMMddHHmmss&quot;)]GEN" Font="Calibri, 14pt" Style="Client_report_style"/>
       <TextObject Name="Text3" Left="616.14" Top="37.8" Width="94.5" Height="28.35" Text="v[Report.ReportInfo.Version]" HorzAlign="Right" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text4" Top="9.45" Width="132.3" Height="18.9" Text="Autor: [Report.ReportInfo.Author]" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text5" Top="66.15" Width="274.05" Height="18.9" Text="Válido hasta: [DateTime.Now.AddDays(30).ToString(&quot;dd/MM/yyyy&quot;)]" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text6" Top="37.8" Width="217.35" Height="18.9" Text="USO INTERNO EXCLUSIVO" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text4" Top="9.45" Width="132.3" Height="18.9" Text="Author: [Report.ReportInfo.Author]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text5" Top="66.15" Width="274.05" Height="18.9" Text="Valid until: [DateTime.Now.AddDays(30).ToString(&quot;dd/MM/yyyy&quot;)]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text6" Top="37.8" Width="217.35" Height="18.9" Text="FOR INTERNAL USE ONLY" Font="Calibri, 14pt" Style="Client_report_style"/>
       <TextObject Name="Text9" Top="122.85" Width="28.35" Height="18.9" Text="ID" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text10" Left="37.8" Top="122.85" Width="75.6" Height="18.9" Text="Nombre" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text11" Left="141.75" Top="122.85" Width="94.5" Height="18.9" Text="Apellido" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text10" Left="41.58" Top="122.85" Width="75.6" Height="18.9" Text="Name" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text11" Left="141.75" Top="122.85" Width="94.5" Height="18.9" Text="Surname" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
       <TextObject Name="Text12" Left="274.05" Top="122.85" Width="47.25" Height="18.9" Text="DNI" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
       <TextObject Name="Text13" Left="453.6" Top="122.85" Width="56.7" Height="18.9" Text="Email" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text14" Left="652.05" Top="122.85" Width="47.25" Height="18.9" Text="Tlfn" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text14" Left="642.6" Top="122.85" Width="66.15" Height="18.9" Text="Phone" HorzAlign="Center" VertAlign="Center" Font="Calibri, 14pt" Style="Client_report_style"/>
     </PageHeaderBand>
     <DataBand Name="Data1" Top="215.9" Width="718.2" Height="50.4" Style="Client_report_style" DataSource="Clients">
       <TableObject Name="Table1" Width="724.3" Height="50.4">
@@ -75,7 +75,7 @@
     </DataBand>
     <PageFooterBand Name="PageFooter1" Top="270.3" Width="718.2" Height="37.8">
       <TextObject Name="Text7" Top="9.45" Width="141.75" Height="28.35" Text="[Page] / [TotalPages]" Font="Calibri, 14pt" Style="Client_report_style"/>
-      <TextObject Name="Text8" Left="500.85" Top="9.45" Width="217.35" Height="18.9" Text="Generado el: [Date]" Font="Calibri, 14pt" Style="Client_report_style"/>
+      <TextObject Name="Text8" Left="463.05" Top="9.45" Width="255.15" Height="18.9" Text="Generated on: [Date]" Font="Calibri, 14pt" Style="Client_report_style"/>
     </PageFooterBand>
   </ReportPage>
 </Report>
